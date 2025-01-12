@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import { MdOutlineFileUpload } from "react-icons/md";
 import { SlOptions } from "react-icons/sl";
 

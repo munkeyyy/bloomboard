@@ -3,7 +3,7 @@ import React, { useRef, useState } from "react";
 import { FiChevronsRight, FiPlus } from "react-icons/fi";
 import { HiArrowCircleUp } from "react-icons/hi";
 import { IoClose } from "react-icons/io5";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 const Create = () => {
   const widthRef = useRef(null);
@@ -319,7 +319,7 @@ const Create = () => {
                   handleChange,
                   handleBlur,
                   handleSubmit,
-                  isSubmitting,
+                  // isSubmitting,
                   /* and other goodies */
                 }) => (
                   <form
