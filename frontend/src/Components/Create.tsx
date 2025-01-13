@@ -293,7 +293,7 @@ const Create = () => {
 
             <div className="w-[40%] relative ">
               {isDisabled && (
-                <div className="h-[100%] cursor-not-allowed bg-[#f7f7f7] opacity-[.6] top-0 w-full absolute "></div>
+                <div className="h-[100%] ml-8 cursor-not-allowed bg-[#f7f7f7] opacity-[.6] top-0 w-full absolute "></div>
               )}
               <Formik
                 enableReinitialize
