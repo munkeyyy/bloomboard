@@ -167,18 +167,23 @@ const Create = () => {
 
   const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
-    console.log("bal", value)
-    const matchingTopicArray = topics.find((topicArray) =>
-      topicArray.some((topic) =>{
-        console.log("topiv",topic)
-       const g= topic.toLowerCase().includes(value.toLowerCase())
-        return g&&topic
-      }
-        
+    
+    if (!value) {
+      setSelectedTopic([]); // Clear selection if input is empty
+      return;
+    }
+  
+    const matchingTopicArrays = topics.filter((topicArray) =>
+      topicArray.some((topic) => 
+        topic.toLowerCase().includes(value.toLowerCase())
       )
     );
-    console.log("top",matchingTopicArray)
-    setSelectedTopic(matchingTopicArray || []);
+  
+    // If you want to combine all matching arrays into one
+    const allMatchingTopics = matchingTopicArrays.flat();
+    
+    // Or if you want to keep them as separate arrays
+    setSelectedTopic(allMatchingTopics); // or setSelectedTopic(matchingTopicArrays);
   };
 
   interface FormValues {
@@ -406,14 +411,17 @@ const Create = () => {
                       </p>
                     </div>
 
-                    <div className={`flex flex-col gap-2 w-full ${!isDisabled && "relative"}`}>
+                    <div
+                      className={`flex flex-col gap-2 w-full ${
+                        !isDisabled && "relative"
+                      }`}
+                    >
                       {selectedTopic.length > 0 && (
                         <div className="rounded-2xl p-2 w-full absolute z-[1] bg-white top-[-225px]">
                           <span className="text-gray-300 text-xs">{`matched tags (${selectedTopic.length})`}</span>
                           <div className="mt-2 w-full h-[200px] overflow-y-auto">
-                            {selectedTopic.map((t: string, i:number) => (
-                              <div
-                      
+                            {selectedTopic.map((t: string, i: number) => (
+                              !taggedTopics.includes(t)&&(<div
                                 onClick={() =>
                                   setTaggedTopics([...taggedTopics, t])
                                 }
@@ -421,7 +429,7 @@ const Create = () => {
                                 className="w-full text-black my-2"
                               >
                                 {t}
-                              </div>
+                              </div>)
                             ))}
                           </div>
                         </div>
@@ -437,16 +445,28 @@ const Create = () => {
                         onBlur={handleBlur}
                         value={values.topics}
                         placeholder="Add topics "
-                        className={`bg-transparent w-full p-3 border-2 border-gray-200 rounded-2xl text-black ${!isDisabled&&"relative z-[2]"} `}
+                        className={`bg-transparent w-full p-3 border-2 border-gray-200 rounded-2xl text-black ${
+                          !isDisabled && "relative z-[2]"
+                        } `}
                       />
                       {taggedTopics.length > 0 && (
                         <div className="flex items-center gap-4 flex-wrap">
                           {taggedTopics &&
-                            taggedTopics.map((tag,i) => (
-                              <div key={i} className="py-3 px-5 bg-black text-white rounded-full flex items-center gap-3 justify-between">
+                            taggedTopics.map((tag, i) => (
+                              <div
+                                key={i}
+                                className="py-3 px-5 bg-black text-white rounded-full flex items-center gap-3 justify-between"
+                              >
                                 <span>{tag}</span>
-                                <button type="button" className="text-white text-lg">
-                                <IoClose />
+                                <button
+                                  type="button"
+                                  onClick={()=>{
+                                    const updatedTags= taggedTopics.filter((t)=>t!==tag)
+                                    setTaggedTopics(updatedTags)
+                                  }}
+                                  className="text-white text-lg"
+                                >
+                                  <IoClose />
                                 </button>
                               </div>
                             ))}
