@@ -7,11 +7,11 @@ import { FaChevronDown } from "react-icons/fa";
 const Header = () => {
   const [active, setActive] = useState("home");
   return (
-    <div className="flex items-center justify-between w-full p-4 sticky top-0 bg-white z-40">
-      <div className="py-4 px-2 transition-all duration-300 hover:bg-gray-100 rounded-full">
+    <div className="flex items-center justify-between w-full p-4 sticky top-0 bg-[#000] z-40">
+      <div className="py-4 px-2 transition-all duration-300  rounded-full">
         <Link
           to={"/"}
-          className="logo  py-2 px-4 rounded-full text-xl font-extrabold bg-red-600 text-white"
+          className="logo  py-2 px-4 rounded-full text-4xl font-extrabold  text-[#C1FF00]"
         >
           B
         </Link>
@@ -19,10 +19,10 @@ const Header = () => {
       <div className="flex items-center justify-center gap-3 mx-2">
         <Link
           onClick={() => setActive("home")}
-          className={`py-2 px-3 rounded-full text-base font-medium ${
+          className={`py-2 px-3 rounded-full text-base font-normal hover:border hover:border-[#C1FF00] hover:text-[#C1FF00]  ${
             active === "home"
-              ? "text-white bg-black"
-              : "text-black bg-transparent"
+              ? "text-[#C1FF00] border border-[#C1FF00]"
+              : "text-white border-none"
           }`}
           to="/"
         >
@@ -30,10 +30,10 @@ const Header = () => {
         </Link>
         <Link
           onClick={() => setActive("today")}
-          className={`py-2 px-3 rounded-full text-base font-medium ${
+          className={`py-2 px-3 rounded-full text-base font-normal hover:border hover:border-[#C1FF00] hover:text-[#C1FF00] ${
             active === "today"
-              ? "text-white bg-black"
-              : "text-black bg-transparent"
+              ? "text-[#C1FF00] border border-[#C1FF00]"
+              : "text-white border-none"
           }`}
           to="/today"
         >
@@ -41,42 +41,43 @@ const Header = () => {
         </Link>
         <Link
           onClick={() => setActive("create")}
-          className={`py-2 px-3 rounded-full text-base font-medium ${
+          className={`py-2 px-3 rounded-full text-base font-normal hover:border hover:border-[#C1FF00] hover:text-[#C1FF00] ${
             active === "create"
-              ? "text-white bg-black"
-              : "text-black bg-transparent"
+              ? "text-[#C1FF00] border border-[#C1FF00]"
+              : "text-white border-none"
           }`}
           to="/create"
         >
           Create
         </Link>
       </div>
-      <div className="search w-full rounded-full bg-gray-100 px-2  flex items-center gap-2">
-        <span className="text-black text-xl px-4">
+      <div className="search w-full rounded-full bg-transparent px-2 border  border-[#222222] flex items-center gap-2 max-w-6xl">
+        <span className="text-[#C1FF00] text-xl px-4">
           <IoSearch />
         </span>
         <input
           type="text"
-          className="h-full w-full bg-transparent py-4 focus-within:outline-none text-black"
+          placeholder="Search"
+          className="h-full w-full bg-transparent py-4 focus-within:outline-none text-white"
         />
       </div>
 
       <div className="flex items-center gap-2 mx-4">
-        <div className="p-2 transition-all duration-300 hover:bg-gray-100 rounded-full">
-          <GoBellFill className="text-gray-500 text-2xl" />
+        <div className="p-2 transition-all duration-300 text-[#C1FF00] ">
+          <GoBellFill className="text-[#C1FF00] text-2xl group-hover:scale-[0.95]" />
         </div>
-        <div className="p-2 transition-all duration-300 hover:bg-gray-100 rounded-full">
-          <TbMessageCircleFilled className="text-gray-500 text-2xl" />
+        <div className="p-2 transition-all duration-300 ">
+          <TbMessageCircleFilled className="text-[#C1FF00] text-2xl group-hover:scale-[0.95]" />
         </div>
         <div className="flex gap-1 items-center">
-          <div className="h-12 w-12 p-2  transition-all duration-300 hover:bg-gray-100 rounded-full overflow-hidden">
+          <div className="h-12 w-12 p-2  transition-all duration-300  overflow-hidden">
             <img
               src="https://i.pinimg.com/30x30_RS/e7/72/5a/e7725a9940eb2b022520805ef8eaaf79.jpg"
               alt="profile-img"
-              className="h-full w-full object-cover rounded-full"
+              className="h-full w-full object-cover rounded-full group-hover:scale-[0.95]"
             />
           </div>
-          <div className="rounded-full p-2 transition-all duration-300 flex items-center justify-center text-gray-500 hover:bg-gray-100">
+          <div className="rounded-full p-2 transition-all duration-300 flex items-center justify-center text-[#C1FF00] ">
             <span className="text-base">
               <FaChevronDown className="text-base" />
             </span>

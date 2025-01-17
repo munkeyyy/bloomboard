@@ -19,10 +19,10 @@ const Home = () => {
         {pics.map((pic: any) => (
           <div className="column mb-3 pb-10 relative" key={pic.id}>
             <div 
-              className="rounded-xl group overflow-hidden  relative"
+              className="rounded-xl group overflow-hidden   relative"
              
             >
-              <div className={`hover-overlay absolute h-full w-full bg-[rgba(0,0,0,0.6)] hidden group-hover:flex justify-between flex-col py-4 px-6 `}>
+              <div className={`hover-overlay  absolute h-full w-full bg-[rgba(0,0,0,0.6)] hidden group-hover:flex justify-between flex-col py-4 px-6 `}>
                 <div className="flex items-center justify-between ">
                   <p className="self-center text-white font-medium">Profile</p>
                   <button className="bg-red-600 text-white font-medium px-4 py-3 rounded-full">Save</button>
@@ -39,14 +39,14 @@ const Home = () => {
               />
             </div>
             <div className="px-2 py-1 flex items-center gap-2 absolute bottom-0 z-10">
-              <div className=" h-8 w-8 rounded-full overflow-hidden">
+              <div className=" h-8 w-8 rounded-full border-2 border-[#C1FF00] overflow-hidden">
                 <img
                   src={pic?.userImageURL}
                   className="h-full w-full object-cover"
                   alt={pic?.tags}
                 />
               </div>
-              <span className="text-black font-medium capitalize text-sm">{pic?.user}</span>
+              <span className="text-white font-medium capitalize text-sm">{pic?.user}</span>
             </div>
           </div>
         ))}

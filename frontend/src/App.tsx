@@ -10,7 +10,7 @@ import Profile from "./Components/Profile";
 function App() {
   return (
     <>
-      <div className="bg-[#f5f5f5] h-full">
+      <div className="bg-[#111111] h-full">
         <Header />
         <Routes>
           <Route path="/" element={<Home />} />
