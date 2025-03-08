@@ -2,148 +2,15 @@ import { Formik } from "formik";
 import React, { useRef, useState } from "react";
 import { FiChevronsRight, FiPlus } from "react-icons/fi";
 import { HiArrowCircleUp } from "react-icons/hi";
-import { IoClose } from "react-icons/io5";
+
 // import { Link } from "react-router-dom";
 
 const Create = () => {
   const widthRef = useRef(null);
   const [barWidth, setBarWidth] = useState<number>(5);
   const [isDisabled, setIsDisable] = useState<boolean>(true);
-  const [taggedTopics, setTaggedTopics] = useState<string[]>([]);
   const [imageSrc, setImageSrc] = useState<string>("");
-  const [selectedTopic, setSelectedTopic] = useState<string[]>([]);
-  const topics = [
-    [
-      "anime",
-      "almond nails",
-      "acrylic nails",
-      "airport outfit",
-      "a line dress",
-      "attack o titan",
-      "anime drawing",
-      "angel",
-      "asian beauty",
-      "adidas",
-      "acrylic painting",
-      "allah",
-      "anime girls",
-      "nail art",
-      "abstract painting",
-      "aura",
-    ],
-    [
-      "black",
-      "birthday cake",
-      "bts",
-      "braids",
-      "bedroom",
-      "blue",
-      "blue nails",
-      "baech outfit",
-      "bmw",
-      "black nails",
-      "butterfly",
-      "butterfly  tattoo",
-      "birthday",
-      "batman",
-      "bathroom",
-      "bangs",
-      "brownhair",
-    ],
-    [
-      "Cat",
-      "Color",
-      "Curly Hairstyles",
-      "Christmas",
-      "Chicken Recipes",
-      "Cute Hairstyles",
-      "Character Design",
-      "Cake",
-      "Chicken Breast Recipes",
-      "Crochet",
-      "Clothes",
-      "Coffee",
-      "Color Palette",
-      "Chicken",
-      "Chocolate Chip Cookies",
-      "Concert Outfit",
-      "Coloring Pages",
-      "Cookies",
-      "Christmas Cookies",
-    ],
-    [
-      "Drawing Ideas",
-      "Dinner Party",
-      "Dinner Recipes",
-      "Disney Princess",
-      "Doodles",
-      "Desktop Wallpaper",
-      "Date Night Outfit",
-      "Dogs",
-      "Deadpool",
-      "Dragon Tattoo",
-      "Dior",
-      "Draco Malfoy",
-    ],
-    [
-      "Engagement Rings",
-      "Eye Makeup",
-      "Engagement Photos",
-      "Easy Hairstyles",
-      "Embroidery",
-      "Easter",
-      "Easy Meals",
-      "Eyeliner",
-      "Eye Drawing",
-      "Easter Nails",
-      "Eyeshadow Looks",
-      "Easy Snacks",
-      "Enchiladas",
-      "Eyelash Extensions",
-      "Elephant",
-      "Electric Guitar",
-      "Eyebrows",
-      "Emo Makeup",
-    ],
-    [
-      "Flowers",
-      "Fall Nails",
-      "French Nails",
-      "Funny",
-      "Flower Drawing",
-      "Friendship Quotes",
-      "Funny Quotes",
-      "Food Porn",
-      "Fish",
-      "Funky Nails",
-      "Forest",
-      "Fox",
-      "Frame",
-      "Fruit Salad",
-      "Fried Rice",
-      "Face Drawing",
-      "Frog",
-      "Ferrari",
-    ],
-    [
-      "Good Morning Quotes",
-      "Goddess Braids",
-      "Gel Nails",
-      "Gym",
-      "Green",
-      "Green Nails",
-      "GIF",
-      "Gyaru",
-      "Graphic Design",
-      "Golden Retriever",
-      "Graduation Dress",
-      "Gym Outfit",
-      "Guitar",
-      "Gold Nails",
-      "Graffiti",
-      "Garden Ideas",
-    ],
-  ];
+
   const handleWidth = () => {
     if (widthRef?.current) {
       // Toggle between 5% and 20% width
@@ -165,33 +32,13 @@ const Create = () => {
     }
   };
 
-  const handleTopicChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const value = e.target.value;
-    
-    if (!value) {
-      setSelectedTopic([]); // Clear selection if input is empty
-      return;
-    }
-  
-    const matchingTopicArrays = topics.filter((topicArray) =>
-      topicArray.some((topic) => 
-        topic.toLowerCase().includes(value.toLowerCase())
-      )
-    );
-  
-    // If you want to combine all matching arrays into one
-    const allMatchingTopics = matchingTopicArrays.flat();
-    
-    // Or if you want to keep them as separate arrays
-    setSelectedTopic(allMatchingTopics); // or setSelectedTopic(matchingTopicArrays);
-  };
+
 
   interface FormValues {
     title: string;
     description: string;
     link: string;
     board: string;
-    topics: string[];
   }
 
   const formValidate = (values: FormValues) => {
@@ -307,7 +154,7 @@ const Create = () => {
                   description: "",
                   link: "",
                   board: "",
-                  topics: taggedTopics,
+            
                 }}
                 validate={formValidate}
                 onSubmit={(values, { setSubmitting }) => {
@@ -411,71 +258,7 @@ const Create = () => {
                       </p>
                     </div>
 
-                    <div
-                      className={`flex flex-col gap-2 w-full ${
-                        !isDisabled && "relative"
-                      }`}
-                    >
-                      {selectedTopic.length > 0 && (
-                        <div className="rounded-2xl p-2 w-full absolute z-[1] bg-[#2c2c2c] border-[#46464622] top-[-225px]">
-                          <span className="text-white text-xs">{`matched tags (${selectedTopic.length})`}</span>
-                          <div className="mt-2 w-full h-[200px] overflow-y-auto">
-                            {selectedTopic.map((t: string, i: number) => (
-                              !taggedTopics.includes(t)&&(<div
-                                onClick={() =>
-                                  setTaggedTopics([...taggedTopics, t])
-                                }
-                                key={i}
-                                className="w-full text-white my-2"
-                              >
-                                {t}
-                              </div>)
-                            ))}
-                          </div>
-                        </div>
-                      )}
-                      <label htmlFor="topics" className="text-white text-xs">
-                        {" "}
-                        Topics
-                      </label>
-                      <input
-                        type="text"
-                        name="topics"
-                        onChange={(e) => handleTopicChange(e)}
-                        onBlur={handleBlur}
-                        value={values.topics}
-                        placeholder="Add topics "
-                        className={`bg-transparent w-full p-3 border-2 border-[#46464622] rounded-2xl text- ${
-                          !isDisabled && "relative z-[2]"
-                        } `}
-                      />
-                      {taggedTopics.length > 0 && (
-                        <div className="flex items-center gap-4 flex-wrap">
-                          {taggedTopics &&
-                            taggedTopics.map((tag, i) => (
-                              <div
-                                key={i}
-                                className="py-3 px-5 border border-[#C1FF00] text-white rounded-full flex items-center gap-3 justify-between"
-                              >
-                                <span>{tag}</span>
-                                <button
-                                  type="button"
-                                  onClick={()=>{
-                                    const updatedTags= taggedTopics.filter((t)=>t!==tag)
-                                    setTaggedTopics(updatedTags)
-                                  }}
-                                  className="text-white text-lg"
-                                >
-                                  <IoClose />
-                                </button>
-                              </div>
-                            ))}
-                        </div>
-                      )}
-                      <p className="self-center text-red-600">
-                        {errors.topics && touched.topics && errors.topics}
-                      </p>
-                    </div>
+                   
                   </form>
                 )}
               </Formik>

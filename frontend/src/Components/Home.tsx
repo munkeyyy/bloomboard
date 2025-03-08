@@ -8,15 +8,15 @@ const Home = () => {
 
   useEffect(() => {
     axios
-      .get("https://pixabay.com/api/?key=48016565-dfc53b755cca03b3d3ac468bb")
-      .then((res) => setPics(res.data.hits))
+      .get("http://localhost:8000/posts/get-posts")
+      .then((res) => setPics(res.data.data))
       .catch((err) => console.log(err));
   }, []);
 
   return (
     <div className="p-4   mx-auto">
       <div className="lg:columns-5 md:columns-4 sm:columns-3 columns-2 gap-4">
-        {pics.map((pic: any) => (
+        {pics.map((pic: any,i) => (
           <div className="column mb-3 pb-10 relative" key={pic.id}>
             <div 
               className="rounded-xl group overflow-hidden   relative"
@@ -33,20 +33,14 @@ const Home = () => {
                 </div>
               </div>
               <img
-                src={pic?.webformatURL}
+                src={pic?.file}
                 className="h-full w-full"
-                alt={pic?.tags}
+                alt={pic+i}
               />
             </div>
             <div className="px-2 py-1 flex items-center gap-2 absolute bottom-0 z-10">
-              <div className=" h-8 w-8 rounded-full border-2 border-[#C1FF00] overflow-hidden">
-                <img
-                  src={pic?.userImageURL}
-                  className="h-full w-full object-cover"
-                  alt={pic?.tags}
-                />
-              </div>
-              <span className="text-white font-medium capitalize text-sm">{pic?.user}</span>
+          
+              <span className="text-white font-medium capitalize text-sm">{pic?.user?.userName}</span>
             </div>
           </div>
         ))}
